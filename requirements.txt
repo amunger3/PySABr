@@ -1,0 +1,12 @@
+bleach==3.2.1
+docutils==0.16
+mpmath==1.1.0
+packaging==20.7
+Pygments==2.7.2
+pyparsing==2.4.7
+requests==2.25.0
+requests-toolbelt==0.9.1
+six==1.15.0
+twine==3.2.0
+webencodings==0.5.1
+xlwings==0.21.4
