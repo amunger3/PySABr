@@ -17,3 +17,6 @@ vendor
 
 # npm -> ./node_modules/
 node_modules
+
+# Logs
+latex/*.log
