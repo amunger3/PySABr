@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>PySABr</title>
+</head>
+
+<body>
+    <form>
+
+        <p><b>Batting Line</b>
+            <p>
+                <table border="1" cellspacing="0" cellpadding="4">
+                    <tr>
+                        <th>AB</th>
+                        <th>H</th>
+                        <th>2B</th>
+                        <th>3B</th>
+                        <th>HR</th>
+                        <th>BB</th>
+                        <th>SO</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" value="37" size="5" name="inAB"></td>
+                        <td><input type="text" value="10" size="5" name="inH"></td>
+                        <td><input type="text" value="2" size="5" name="in2B"></td>
+                        <td><input type="text" value="0" size="5" name="in3B"></td>
+                        <td><input type="text" value="1" size="5" name="inHR"></td>
+                        <td><input type="text" value="4" size="5" name="inBB"></td>
+                        <td><input type="text" value="7" size="5" name="inSO"></td>
+                    </tr>
+                </table>
+
+                <p>&nbsp;
+                    <p>
+                        <b>BaseRunning: Chances of Taking Extra Base</b>
+                        <p>
+                            <table border="1" cellspacing="0" cellpadding="4">
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Runner On...</th>
+                                    <th>0 outs</th>
+                                    <th>1 out</th>
+                                    <th>2 outs</th>
+                                </tr>
+                                <tr>
+                                    <td>1B</td>
+                                    <td>1B</td>
+                                    <td><input type="text" size="4" value="0.25" name="in_event1B_state1B_0"></td>
+                                    <td><input type="text" size="4" value="0.25" name="in_event1B_state1B_1"></td>
+                                    <td><input type="text" size="4" value="0.25" name="in_event1B_state1B_2"></td>
+                                    <tr>
+                                        <td>1B</td>
+                                        <td>2B</td>
+                                        <td><input type="text" size="4" value="0.3" name="in_event1B_state2B_0"></td>
+                                        <td><input type="text" size="4" value="0.50" name="in_event1B_state2B_1"></td>
+                                        <td><input type="text" size="4" value="0.75" name="in_event1B_state2B_2"></td>
+                                        <tr>
+                                            <td>2B</td>
+                                            <td>1B</td>
+                                            <td><input type="text" size="4" value="0.15" name="in_event2B_state1B_0"></td>
+                                            <td><input type="text" size="4" value="0.25" name="in_event2B_state1B_1"></td>
+                                            <td><input type="text" size="4" value="0.50" name="in_event2B_state1B_2"></td>
+                                            <tr>
+                                                <td>OUT</td>
+                                                <td>1B</td>
+                                                <td><input type="text" size="4" value="0.05" name="in_eventOUT_state1B_0"></td>
+                                                <td><input type="text" size="4" value="0.05" name="in_eventOUT_state1B_1"></td>
+                                                <td><input type="text" size="4" value="0" name="in_eventOUT_state1B_2"></td>
+                                                <tr>
+                                                    <td>OUT</td>
+                                                    <td>2B</td>
+                                                    <td><input type="text" size="4" value="0.25" name="in_eventOUT_state2B_0"></td>
+                                                    <td><input type="text" size="4" value="0.25" name="in_eventOUT_state2B_1"></td>
+                                                    <td><input type="text" size="4" value="0" name="in_eventOUT_state2B_2"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>OUT</td>
+                                                    <td>3B</td>
+                                                    <td><input type="text" size="4" value="0.50" name="in_eventOUT_state3B_0"></td>
+                                                    <td><input type="text" size="4" value="0.50" name="in_eventOUT_state3B_1"></td>
+                                                    <td><input type="text" size="4" value="0" name="in_eventOUT_state3B_2"></td>
+                                                </tr>
+                                            </tr>
+                                        </tr>
+                                    </tr>
+                                </tr>
+                            </table>
+                            <p>Note: Event OUT excludes strikeouts.
+                                <p>
+                                    <input type="button" value="Calculate" onclick="calcRuns(this.form)">
+                                </p>
+                            </p>
+                        </p>
+                    </p>
+                </p>
+            </p>
+        </p>
+    </form>
+</body>
+
+</html>
