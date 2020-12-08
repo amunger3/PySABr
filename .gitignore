@@ -19,4 +19,9 @@ vendor
 node_modules
 
 # Logs
-latex/*.log
+*.log
+
+# PDFTeX Files
+*.aux
+*.gz
+*.pdf
