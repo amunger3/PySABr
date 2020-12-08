@@ -23,5 +23,8 @@ node_modules
 
 # PDFTeX Files
 *.aux
+*.fdb*
+*.fls
 *.gz
 *.pdf
+*.xdv

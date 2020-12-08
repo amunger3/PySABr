@@ -4,9 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "echo",
+            "label": "Build PDFTeX",
             "type": "shell",
-            "command": "echo Hello"
+            "command": "cd latex && pdftex.exe -synctex=1 PySABr.tex"
         }
     ]
 }
