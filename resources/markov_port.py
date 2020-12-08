@@ -100,7 +100,17 @@ class RunExpCalc:
         bsox['2B'][2][1] = bsox['3B'][2][2] * (fqBB + fq1B * (1 - xb['1B']['2B'][2])) + fqOUT
         bsox['2B'][2][0] = bsox['2B'][2][1] * fqBB + bsox['3B'][2][1] * fq1B * (1 - xb['1B']['2B'][2]) + fqOUT
         # 2B - 1 out
-        bsox['2B'][1][1] = bsox['3B'][1][2] * (fqBB + fq1B * (1 - xb['1B']['2B'][1])) + bsox['3B'][2][1] * fqOUT * rtBBO * xb['OUT']['2B'][1] + bsox['2B'][2][1] * fqOUT * (1 - rtBBO * xb['OUT']['2B'][1])
+        bsox['2B'][1][1] = (
+            bsox['3B'][1][2] * (fqBB + fq1B * (1 - xb['1B']['2B'][1])) +
+            bsox['3B'][2][1] * fqOUT * rtBBO * xb['OUT']['2B'][1] +
+            bsox['2B'][2][1] * fqOUT * (1 - rtBBO * xb['OUT']['2B'][1])
+        )
+        bsox['2B'][1][0] = (
+            bsox['2B'][1][1] * fqBB +
+            bsox['3B'][1][1] * fq1B * (1 - xb['1B']['2B'][1]) +
+            bsox['3B'][2][0] * fqOUT * rtBBO * xb['OUT']['2B'][1] +
+            bsox['2B'][2][0] * fqOUT * (1 - rtBBO * xb['OUT']['2B'][1])
+        )
 
         return bsox
 

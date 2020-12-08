@@ -45,11 +45,11 @@ class RE24:
 
 def main():
     wb = xw.Book.caller()
-    sheet = wb.sheets[0]
-    if sheet["A1"].value == "Hello xlwings!":
-        sheet["A1"].value = "Bye xlwings!"
+    sheet = wb.sheets['Sheet1']
+    if sheet['A1'].value == 'Hello!':
+        sheet['A1'].value = 'Bye!'
     else:
-        sheet["A1"].value = "Hello xlwings!"
+        sheet['A1'].value = 'Hello!'
 
 
 @xw.func
