@@ -22,9 +22,13 @@ node_modules
 *.log
 
 # PDFTeX Files
+*-blx.bib
 *.aux
+*.bbl
+*.blg
+*.run.xml
 *.fdb*
 *.fls
-*.gz
+*.synctex.gz
 *.pdf
 *.xdv
