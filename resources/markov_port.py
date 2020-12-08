@@ -80,6 +80,7 @@ class RunExpCalc:
         # Markov Chaining -> bsox[lead][outs][add_bsrn]
         # Short defs
         fq1B = fqrts['fqs']['1B']
+        fq2B = fqrts['fqs']['2B']
         fqBB = fqrts['fqs']['BB']
         fqOUT = fqrts['fqs']['OUT']
         rtBBO = fqrts['rts']['BBO']
@@ -110,6 +111,38 @@ class RunExpCalc:
             bsox['3B'][1][1] * fq1B * (1 - xb['1B']['2B'][1]) +
             bsox['3B'][2][0] * fqOUT * rtBBO * xb['OUT']['2B'][1] +
             bsox['2B'][2][0] * fqOUT * (1 - rtBBO * xb['OUT']['2B'][1])
+        )
+        # 2B - 0 outs
+        bsox['2B'][0][1] = (
+            bsox['3B'][0][2] * (fqBB + fq1B * (1 - xb['1B']['2B'][0])) +
+            bsox['3B'][1][1] * fqOUT * rtBBO * xb['OUT']['2B'][0] +
+            bsox['2B'][1][1] * fqOUT * (1 - rtBBO * xb['OUT']['2B'][0])
+        )
+        bsox['2B'][0][0] = (
+            bsox['2B'][0][1] * fqBB +
+            bsox['3B'][0][1] * fq1B * (1 - xb['1B']['2B'][0]) +
+            bsox['3B'][1][0] * fqOUT * rtBBO * xb['OUT']['2B'][0] +
+            bsox['2B'][1][0] * fqOUT * (1 - rtBBO * xb['OUT']['2B'][0])
+        )
+        # 1B - 2 outs
+        bsox['1B'][2][0] = (
+            bsox['2B'][2][1] * (fqBB + fq1B * (1 - xb['1B']['1B'][2])) +
+            bsox['3B'][2][1] * (fq1B * (xb['1B']['1B'][2]) + fq2B * (1 - xb['2B']['1B'][2])) +
+            fqOUT
+        )
+        # 1B - 1 out
+        bsox['1B'][1][0] = (
+            bsox['2B'][1][1] * (fqBB + fq1B * (1 - xb['1B']['1B'][1])) +
+            bsox['3B'][1][1] * (fq1B * (xb['1B']['1B'][1]) + fq2B * (1 - xb['2B']['1B'][1])) +
+            bsox['2B'][2][0] * fqOUT * rtBBO * xb['OUT']['1B'][1] +
+            bsox['1B'][2][0] * fqOUT * (1 - rtBBO * xb['OUT']['1B'][1])
+        )
+        # 1B - 0 outs
+        bsox['1B'][0][0] = (
+            bsox['2B'][0][1] * (fqBB + fq1B * (1 - xb['1B']['1B'][0])) +
+            bsox['3B'][0][1] * (fq1B * (xb['1B']['1B'][0]) + fq2B * (1 - xb['2B']['1B'][0])) +
+            bsox['2B'][1][0] * fqOUT * rtBBO * xb['OUT']['1B'][0] +
+            bsox['1B'][1][0] * fqOUT * (1 - rtBBO * xb['OUT']['1B'][0])
         )
 
         return bsox
