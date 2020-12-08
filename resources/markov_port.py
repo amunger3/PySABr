@@ -88,7 +88,7 @@ class RunExpCalc:
         # 3B - 2 outs
         bsox['3B'][2][2] = fqOUT
         bsox['3B'][2][1] = bsox['3B'][2][2] * fqBB + fqOUT
-        bsox['3B'][2][0] = bsox['3B'][2][1] * fqBB + fqrts['fqs']['OUT']
+        bsox['3B'][2][0] = bsox['3B'][2][1] * fqBB + fqOUT
         # 3B - 1 out
         bsox['3B'][1][2] = bsox['3B'][2][2] * fqOUT * (1 - rtBBO * xb['OUT']['3B'][1])
         bsox['3B'][1][1] = bsox['3B'][1][2] * fqBB + bsox['3B'][2][1] * fqOUT * (1 - rtBBO * xb['OUT']['3B'][1])
