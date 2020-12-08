@@ -29,6 +29,7 @@ node_modules
 *.run.xml
 *.fdb*
 *.fls
+*.out
 *.synctex.gz
 *.pdf
 *.xdv
