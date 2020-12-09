@@ -1,15 +1,16 @@
-from collections import Counter
+from collections import Counter, namedtuple
+from pprint import pprint
 
 
 _bline_def = Counter(
     {
-        'AB': 37,
-        'H': 10,
-        '2B': 2,
-        '3B': 0,
-        'HR': 1,
-        'BB': 4,
-        'SO': 7
+        'AB': 2074,
+        'H': 556,
+        '2B': 130,
+        '3B': 3,
+        'HR': 103,
+        'BB': 239,
+        'SO': 573
     }
 )
 
@@ -144,10 +145,66 @@ class RunExpCalc:
             bsox['2B'][1][0] * fqOUT * rtBBO * xb['OUT']['1B'][0] +
             bsox['1B'][1][0] * fqOUT * (1 - rtBBO * xb['OUT']['1B'][0])
         )
-
         return bsox
+
+    def chance_rho(self):
+
+        # Chance of scoring
+        bsox = self.re_engine()
+        chrun = {'3B': dict(), '2B': dict(), '1B': dict()}
+
+        # 0 outs (3 remain)
+        chrun['3B'][3] = 1 - (bsox['3B'][2][0] + bsox['3B'][1][0] + bsox['3B'][0][0]) / 3.0
+        chrun['2B'][3] = 1 - (bsox['2B'][2][0] + bsox['2B'][1][0] + bsox['2B'][0][0]) / 3.0
+        chrun['1B'][3] = 1 - (bsox['1B'][2][0] + bsox['1B'][1][0] + bsox['1B'][0][0]) / 3.0
+        # 1 out (2 remain)
+        chrun['3B'][2] = 1 - (bsox['3B'][2][0] + bsox['3B'][1][0]) / 3.0
+        chrun['2B'][2] = 1 - (bsox['2B'][2][0] + bsox['2B'][1][0]) / 3.0
+        chrun['1B'][2] = 1 - (bsox['1B'][2][0] + bsox['1B'][1][0]) / 3.0
+        # 2 outs (1 remains)
+        chrun['3B'][1] = 1 - (bsox['3B'][2][0]) / 3.0
+        chrun['2B'][1] = 1 - (bsox['2B'][2][0]) / 3.0
+        chrun['1B'][1] = 1 - (bsox['1B'][2][0]) / 3.0
+        return chrun
+
+    def mk_rexmat(self):
+
+        # Prereqs
+        fqrts = self.calc_frqs()
+        bsox = self.re_engine()
+        chrun = self.chance_rho()
+
+        # Defs
+        RexMat = []
+
+        # Times a runner scores from an outcome
+        rHR = fqrts['fqs']['HR']
+        r3B_3 = chrun['3B'][3] * fqrts['fqs']['3B']
+        r2B_3 = chrun['2B'][3] * fqrts['fqs']['2B']
+        r1B_3 = chrun['1B'][3] * (fqrts['fqs']['1B'] + fqrts['fqs']['BB'])
+        r3B_2 = chrun['3B'][2] * fqrts['fqs']['3B']
+        r2B_2 = chrun['2B'][2] * fqrts['fqs']['2B']
+        r1B_2 = chrun['1B'][2] * (fqrts['fqs']['1B'] + fqrts['fqs']['BB'])
+        r3B_1 = chrun['3B'][1] * fqrts['fqs']['3B']
+        r2B_1 = chrun['2B'][1] * fqrts['fqs']['2B']
+        r1B_1 = chrun['1B'][1] * (fqrts['fqs']['1B'] + fqrts['fqs']['BB'])
+
+        # Runs/Game
+        rALL = (rHR + r3B_3 + r2B_3 + r1B_3) * fqrts['fqs']['PA']
+        rpi_3 = (rHR + r3B_3 + r2B_3 + r1B_3) * fqrts['fqs']['PA'] / 9.0
+        rpi_2 = (rHR + r3B_2 + r2B_2 + r1B_2) * fqrts['fqs']['PA'] * 2.0 / 3.0 / 9.0
+        rpi_1 = (rHR + r3B_1 + r2B_1 + r1B_1) * fqrts['fqs']['PA'] * 1.0 / 3.0 / 9.0
+        RE_1xx_0 = (1 - bsox['1B'][0][0]) + rpi_3
+        RE_1xx_1 = (1 - bsox['1B'][1][0]) + rpi_2
+        RE_1xx_2 = (1 - bsox['1B'][2][0]) + rpi_1
+
+        return rALL
+
 
 
 if __name__ == '__main__':
     rec = RunExpCalc()
-    print(rec.re_engine())
+    pprint(rec.calc_frqs())
+    pprint(rec.re_engine())
+    pprint(rec.chance_rho())
+    pprint(rec.mk_rexmat())
